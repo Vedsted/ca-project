@@ -1,4 +1,4 @@
-node {
+node('non_privileged') {
   //cleanWs()
 
     stage('Preparation') { // for display purposes
@@ -10,7 +10,6 @@ node {
     repoName: 'origin')], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'thevinge', 
     url: 'git@github.com:Vedsted/ca-project.git']]])
     
- //   stash name: "repo", includes: "**", useDefaultExcludes: false
     }
     
     stage('Unit-Tests') {
@@ -26,11 +25,16 @@ node {
     }
     stage('Push-VC'){
         pretestedIntegrationPublisher()
-
+        stash name: "repo", includes: "**", useDefaultExcludes: false
+ 
     }
-    stage('Deploy image'){
+
+}
+
+node('privileged'){
+	stage('Deploy image'){
+		unstash 'repo'
         sh '$(pwd)/deployment/deploy_image.sh'
         deleteDir()
-    }
-  
+    } 
 }
