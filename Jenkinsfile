@@ -37,13 +37,13 @@ node('deployment_test'){
         sh 'docker pull vedsted/codechan:latest-base'
         sh 'docker run -d --rm --name codechan_Test_Script -v $PWD:/usr/src/codechan -w /usr/src/codechan -p 5000:5000 vedsted/codechan:latest-base python run.py'
         sh 'curl localhost:5000'
-        stash name: "repo", includes: "**", useDefaultExcludes: false
+        stash name: "repo_2", includes: "**", useDefaultExcludes: false
     }
 }
 
 node('privileged'){
 	stage('Publish image'){
-		unstash 'repo'
+		unstash 'repo_2'
         sh '$(pwd)/deployment/deploy_image.sh'
         deleteDir()
     } 
