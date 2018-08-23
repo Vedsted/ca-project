@@ -1,3 +1,5 @@
+[![Waffle.io - Issues in progress](https://badge.waffle.io/Vedsted/ca-project.png?label=in%20progress&title=In%20Progress)](http://waffle.io/Vedsted/ca-project)
+
 # Keystone project
 
 This project is meant for you to make awesome software, with the skills in your Continuous Delivery and DevOps toolbox.
