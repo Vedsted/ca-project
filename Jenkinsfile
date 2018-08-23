@@ -36,7 +36,8 @@ node('deployment_test'){
         unstash 'repo'
         sh 'docker pull vedsted/codechan:latest-base'
         sh 'docker run -d --rm --name codechan_Test_Script -v $PWD:/usr/src/codechan -w /usr/src/codechan -p 5000:5000 vedsted/codechan:latest-base python run.py'
-        sh 'curl localhost:5000'
+        sleep 8s
+        sh 'curl 127.0.0.1:5000'
         sh 'docker stop codechan_Test_Script'
         stash name: "repo_2", includes: "**", useDefaultExcludes: false
         deleteDir()
