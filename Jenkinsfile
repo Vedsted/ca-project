@@ -13,7 +13,7 @@ node {
  //   stash name: "repo", includes: "**", useDefaultExcludes: false
     }
     
-    stage('Test') {
+    stage('Unit-Tests') {
         // Run the maven build
         if (isUnix()) {
          sh 'docker pull vedsted/codechan:latest-base'
@@ -24,10 +24,13 @@ node {
 
         }
     }
-    stage('Push'){
+    stage('Push-VC'){
         pretestedIntegrationPublisher()
 
         deleteDir()
+    }
+    stage('Deploy image'){
+        sh '/deployment/deploy_image.sh'
     }
   
 }
