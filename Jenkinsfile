@@ -16,6 +16,7 @@ node {
     stage('Test') {
         // Run the maven build
         if (isUnix()) {
+         sh 'docker pull vedsted/codechan:latest-base'
          sh 'docker run -i --rm --name codechan_Test_Script -v $PWD:/usr/src/codechan -w /usr/src/codechan vedsted/codechan:latest-base python tests.py'
          //  sh 'docker-compose up -d python tests.py'
             //sh "mvn -Dmaven.test.failure.ignore clean package"
