@@ -7,7 +7,7 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - $(pwd):/application/
+      - ./:/application/
     networks: 
       - if_codechan
 
