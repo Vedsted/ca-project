@@ -31,10 +31,22 @@ node('non_privileged') {
 
 }
 
+node('deployment_test'){
+    stage('Deploy -test'){
+        unstash 'repo'
+        sh 'docker pull vedsted/codechan:latest-base'
+        sh 'docker run -i --rm --name codechan_Test_Script -v $PWD:/usr/src/codechan -w /usr/src/codechan -p 5000:5000 vedsted/codechan:latest-base python run.py'
+        sh 'curl localhost:5000'
+        stash name: "repo", includes: "**", useDefaultExcludes: false
+    }
+}
+
 node('privileged'){
-	stage('Deploy image'){
+	stage('Publish image'){
 		unstash 'repo'
         sh '$(pwd)/deployment/deploy_image.sh'
         deleteDir()
     } 
 }
+
+
