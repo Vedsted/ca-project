@@ -10,13 +10,14 @@ node {
     repoName: 'origin')], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'thevinge', 
     url: 'git@github.com:Vedsted/ca-project.git']]])
     
-    stash name: "repo", includes: "**", useDefaultExcludes: false
+ //   stash name: "repo", includes: "**", useDefaultExcludes: false
     }
     
     stage('Test') {
         // Run the maven build
         if (isUnix()) {
-           sh 'docker run -i -u "$(id -u):$(id -g)" -v $PWD:/usr/src/codechan -w /usr/src/codechan --rm python tests.py'
+         sh 'docker run -i --rm --name codechan_Test_Script -v $PWD:/usr/src/codechan -w /usr/src/codechan vedsted/codechan python tests.py'
+         //  sh 'docker-compose up -d python tests.py'
             //sh "mvn -Dmaven.test.failure.ignore clean package"
 //            stash name: "build-result", includes: "target/**"
 
@@ -27,5 +28,5 @@ node {
 
         deleteDir()
     }
-  }
+  
 }
