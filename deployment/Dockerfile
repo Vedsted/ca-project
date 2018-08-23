@@ -1,3 +1,3 @@
 FROM vedsted/codechan:latest-base
-ADD . /codechan/ /application/
+ADD . /ca-project/ /application/
 CMD python /application/run.py
