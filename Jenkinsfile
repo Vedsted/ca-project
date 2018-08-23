@@ -27,10 +27,10 @@ node {
     stage('Push-VC'){
         pretestedIntegrationPublisher()
 
-        deleteDir()
     }
     stage('Deploy image'){
         sh '$(pwd)/deployment/deploy_image.sh'
+        deleteDir()
     }
   
 }
