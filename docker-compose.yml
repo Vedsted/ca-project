@@ -3,11 +3,9 @@ services:
 
 # flask app
   python-codechan:
-    image: codechan:latest
+    image: vedsted/codechan:latest
     ports:
       - 5000:5000
-    volumes:
-      - ./:/application/
     networks: 
       - if_codechan
 
