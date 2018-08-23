@@ -1,4 +1,4 @@
-version: '3.5'
+version: '3'
 services:
 
 # flask app
@@ -13,4 +13,3 @@ services:
 
 networks:
   if_codechan:
-    name: codechan
