@@ -30,7 +30,7 @@ node {
         deleteDir()
     }
     stage('Deploy image'){
-        sh 'deployment/deploy_image.sh'
+        sh '$(pwd)/deployment/deploy_image.sh'
     }
   
 }
