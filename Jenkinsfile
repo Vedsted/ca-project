@@ -47,7 +47,8 @@ node('deployment_test'){
 node('privileged'){
 	stage('Publish image'){
 		unstash 'repo_2'
-        sh '$(pwd)/deployment/deploy_image.sh'
+        sh 'cd $(pwd)/deployment'
+        sh '. deploy_image.sh'
         deleteDir()
     } 
 }
